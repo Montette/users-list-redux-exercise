@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 
 import './App.css';
 import ContactList from '../compoments/ContactList/ContactList';
-import SearchInput from '../compoments/SearchInput/SearchInput';
+import { ContactsFilterContainer } from '../compoments/ContactsFilter/ContactsFilter';
 
 import { connect } from "react-redux";
 import { contactsFetched } from "../actions/action";
+import { getFilteredContacts } from '../selectors/getFilteredContacts'
 
 class App extends Component {
  
@@ -19,25 +20,11 @@ class App extends Component {
       })
   }
 
-  // getFilteredContactsForText = (text) => {
-  //   return this.state.contacts.filter(contact => contact.name.first.toLowerCase().includes(text.toLowerCase()))
-  // }
-
-  // searchHandler = (event) => {
-  //   console.log(this.state.contacts);
-  //   const text = event.currentTarget.value;
-  //   const filteredContacts = this.getFilteredContactsForText(text);
-  //   console.log(filteredContacts);
-  //   this.setState({
-  //   filteredContacts
-  // });
-  // }
 
   render() {
     return (
       <div className="App">
-      {/* <SearchInput change={this.searchHandler}/> */}
-      {/* {this.props.contacts ? <ContactList contacts={this.props.contacts}/> : 'Loading...'} */}
+      <ContactsFilterContainer />
       <ContactList contacts={this.props.contacts}/>
       </div>
     );
@@ -46,10 +33,10 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    contacts: state.contacts
+    contacts: getFilteredContacts(state.contacts, state.contactsSearch)
   }
 }
 
 const mapDispatchToProps = { contactsFetched };
 export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
-// export default App;
+

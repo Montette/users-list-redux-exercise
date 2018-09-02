@@ -1,9 +1,7 @@
-export const contactsSearch = (state=[], action) => {
+export const contactsSearch = (state='', action) => {
     switch(action.type){
-        case 'SORT_CONTACTS':
-            return [
-                ...action.FilteredContacts
-            ]
+        case 'SEARCH_CONTACTS':
+            return action.text
         default:
             return state
     }
