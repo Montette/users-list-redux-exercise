@@ -12,9 +12,21 @@ const ContactList = (props) => {
         }
     }) 
     return (
-        <ul>
-            {contactItems}   
-        </ul>   
+        <table className='table'>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Login</th>
+                    <th>City</th>
+                    <th>Email</th>
+                    <th>User ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                {contactItems}
+            </tbody>
+        </table>
     )
 }
 
